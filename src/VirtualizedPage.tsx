@@ -18,6 +18,7 @@ const containerStyle: MotionStyle = {
 export const VirtualizedPage: React.FunctionComponent<VirtualizedPageProps> = ({
   children,
 }) => {
+  const x = useMotionValue(0);
   const [index, setIndex] = React.useState(0);
 
   return (
@@ -26,6 +27,7 @@ export const VirtualizedPage: React.FunctionComponent<VirtualizedPageProps> = ({
         return (
           <Page
             key={rangeValue + index}
+            x={x}
             index={rangeValue + index}
             renderPage={children}
           />
