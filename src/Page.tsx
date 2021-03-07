@@ -1,10 +1,11 @@
-import { motion, MotionStyle, MotionValue } from "framer-motion";
+import { motion, MotionStyle, MotionValue, PanInfo } from "framer-motion";
 import React, { FunctionComponent } from "react";
 
 interface PageProps {
   index: number;
   renderPage: (props: { index: number }) => JSX.Element;
   x: MotionValue;
+  onDragEnd(event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo): void;
 }
 
 const pageStyle: MotionStyle = {
@@ -17,6 +18,7 @@ export const Page: FunctionComponent<PageProps> = ({
   index,
   renderPage,
   x,
+  onDragEnd,
 }) => {
   const child = React.useMemo(() => renderPage({ index }), [index, renderPage]);
 
@@ -28,8 +30,10 @@ export const Page: FunctionComponent<PageProps> = ({
         left: `${index * 100}%`,
         right: `${index * 100}%`,
       }}
+      draggable
       drag="x"
       dragElastic={1}
+      onDragEnd={onDragEnd}
     >
       {child}
     </motion.div>
