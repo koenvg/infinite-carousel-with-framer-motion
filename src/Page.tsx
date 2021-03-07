@@ -4,6 +4,7 @@ import React, { FunctionComponent } from "react";
 interface PageProps {
   index: number;
   renderPage: (props: { index: number }) => JSX.Element;
+  x: MotionValue;
 }
 
 const pageStyle: MotionStyle = {
@@ -12,16 +13,23 @@ const pageStyle: MotionStyle = {
   height: "100%",
 };
 
-export const Page: FunctionComponent<PageProps> = ({ index, renderPage }) => {
+export const Page: FunctionComponent<PageProps> = ({
+  index,
+  renderPage,
+  x,
+}) => {
   const child = React.useMemo(() => renderPage({ index }), [index, renderPage]);
 
   return (
     <motion.div
       style={{
         ...pageStyle,
+        x,
         left: `${index * 100}%`,
         right: `${index * 100}%`,
       }}
+      drag="x"
+      dragElastic={1}
     >
       {child}
     </motion.div>
