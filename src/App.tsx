@@ -1,30 +1,31 @@
 import "./styles.css";
 import { VirtualizedPage } from "./VirtualizedPage";
 
+const images = [
+  "https://unsplash.com/photos/1527pjeb6jg/download?force=true&w=640",
+  "https://unsplash.com/photos/9wg5jCEPBsw/download?force=true&w=640",
+  "https://unsplash.com/photos/phIFdC6lA4E/download?force=true&w=640",
+];
 export default function App() {
   return (
     <div
       className="App"
       style={{
-        width: "100vw",
-        height: "100vh",
         display: "flex",
-        justifyContent: "center"
+        justifyContent: "center",
       }}
     >
       <div style={{ width: 200, height: 200 }}>
         <VirtualizedPage>
           {({ index }) => {
+            const modulo = index % images.length;
+            const imageIndex = modulo < 0 ? images.length + modulo : modulo;
             return (
-              <div
-                style={{
-                  height: "100%",
-                  width: "100%",
-                  backgroundColor: ["blue", "green", "yellow", "purple"][
-                    Math.min(Math.abs(index), 2)
-                  ]
-                }}
-              ></div>
+              <img
+                alt="Mountain"
+                style={{ height: "100%", width: "100%" }}
+                src={images[imageIndex]}
+              />
             );
           }}
         </VirtualizedPage>
