@@ -3,33 +3,25 @@ import React, { FunctionComponent } from "react";
 
 interface PageProps {
   index: number;
-  renderPage: ({ index }: { index: number }) => JSX.Element;
-  x: MotionValue;
+  renderPage: (props: { index: number }) => JSX.Element;
 }
 
 const pageStyle: MotionStyle = {
   position: "absolute",
   width: "100%",
-  height: "100%"
+  height: "100%",
 };
 
-export const Page: FunctionComponent<PageProps> = ({
-  x,
-  index,
-  renderPage
-}) => {
+export const Page: FunctionComponent<PageProps> = ({ index, renderPage }) => {
   const child = React.useMemo(() => renderPage({ index }), [index, renderPage]);
 
   return (
     <motion.div
       style={{
-        x,
         ...pageStyle,
         left: `${index * 100}%`,
-        right: `${index * 100}%`
+        right: `${index * 100}%`,
       }}
-      drag="x"
-      dragElastic={1}
     >
       {child}
     </motion.div>
