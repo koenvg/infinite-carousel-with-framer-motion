@@ -15,15 +15,16 @@ export default function App() {
         justifyContent: "center",
       }}
     >
-      <div style={{ width: 200, height: 200 }}>
+      <div style={{ width: 640, height: 500 }}>
         <VirtualizedPage>
           {({ index }) => {
             const modulo = index % images.length;
             const imageIndex = modulo < 0 ? images.length + modulo : modulo;
             return (
               <img
+                draggable={false}
                 alt="Mountain"
-                style={{ height: "100%", width: "100%" }}
+                style={{ width: "100%" }}
                 src={images[imageIndex]}
               />
             );
